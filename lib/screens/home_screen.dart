@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_practice/screens/login_screen.dart';
+import 'package:supabase_practice/screens/upload_image_screen.dart';
+import 'package:supabase_practice/screens/view_images_screen.dart';
 import 'package:supabase_practice/services/auth_services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,11 +31,37 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.login_rounded))
         ],
       ),
-      body: Center(
-        child: Text(
-          authServices.getUserEmail() ?? '',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              authServices.getUserEmail() ?? '',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UploadImageScreen()));
+                  },
+                  child: Text('Upload Image')),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ViewImageScreen()));
+                  },
+                  child: Text('View Images')),
+            ],
+          )
+        ],
       ),
     );
   }
